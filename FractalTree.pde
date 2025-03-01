@@ -22,14 +22,17 @@ public void drawBranches(int x,int y, double branchLength, double angle)
         return;
       }
       
-      int Xend1 = (int)(branchLength * Math.cos(angle + branchAngle) + x);
-      int Yend1 = (int)(branchLength * Math.sin(angle + branchAngle) + y);
-      int Xend2 = (int)(branchLength * Math.cos(angle - branchAngle) + x);
-      int Yend2 = (int)(branchLength * Math.sin(angle - branchAngle) + y);
+      double angle1 = angle + branchAngle;
+      double angle2 = angle - branchAngle;
       
-      line(x, y, Xend1, Yend1);
-      line(x, y, Xend2, Yend2);
+      int endX1 = (int)(branchLength * Math.cos(angle1) + x);
+      int endY1 = (int)(branchLength * Math.sin(angle1) + y);
+      int endX2 = (int)(branchLength * Math.cos(angle2) + x);
+      int endY2 = (int)(branchLength * Math.sin(angle2) + y);
       
-      drawBranches(Xend1, Yend1, branchLength * fractionLength, angle + branchAngle);
-      drawBranches(Xend2, Yend2, branchLength * fractionLength, angle - branchAngle);
+      line(x, y, endX1, endY1);
+      line(x, y, endX2, endY2);
+      
+      drawBranches(endX1, endY1, branchLength * fractionLength, angle + branchAngle);
+      drawBranches(endX2, endY2, branchLength * fractionLength, angle - branchAngle);
 } 
